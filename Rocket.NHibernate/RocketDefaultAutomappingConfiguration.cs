@@ -16,10 +16,18 @@ namespace Rocket.NHibernate
             return member.MemberInfo.GetCustomAttributes(typeof(KeyAttribute), true).Length > 0;
         }
 
+        public override bool ShouldMap(Type type)
+        {
+            //if (base.ShouldMap(type))
+            //    return true;
+            return type.GetCustomAttributes(typeof(TableAttribute), true).Length > 0;
+        }
+
         public override bool IsComponent(Type type)
         {
             if (base.IsComponent(type))
                 return true;
+
             return type.GetCustomAttributes(typeof(TableAttribute), true).Length > 0;
         }
     }

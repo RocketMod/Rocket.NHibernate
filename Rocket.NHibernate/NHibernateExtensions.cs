@@ -7,38 +7,38 @@ namespace Rocket.NHibernate
 {
     public static class NHibernateExtensions
     {
-        public static INHibernateBuilder GetNHibernateBuilder(this INHibernatePlugin plugin)
+        public static INHibernateBuilder GetNHibernateBuilder(this IPlugin plugin)
         {
             var service = plugin.Container.Resolve<INHibernateService>();
             return new NHibernateBuilder(service, plugin);
         }
 
 
-        public static ISession OpenSession(this INHibernatePlugin plugin)
+        public static ISession OpenSession(this IPlugin plugin)
         {
             return plugin.Container.Resolve<INHibernateService>().OpenSession(plugin);
         }
 
-        public static void SaveEntry<T>(this INHibernatePlugin plugin, T entry) where T: class
+        public static void SaveEntry<T>(this ISession session, T entry) where T: class
         {
-            using (var trans = plugin.Session.BeginTransaction())
+            using (var trans = session.BeginTransaction())
             {
-                plugin.Session.Save(entry);
+                session.Save(entry);
                 trans.Commit();
             }
         }
 
-        public static IEnumerable<T> Query<T>(this INHibernatePlugin plugin) where T: class
+        public static IEnumerable<T> Query<T>(this ISession session) where T: class
         {
-            return Query<T>(plugin, null);
+            return Query<T>(session, null);
         }
 
-        public static IEnumerable<T> Query<T>(this INHibernatePlugin plugin, Func<ICriteria, ICriteria> action) where T : class
+        public static IEnumerable<T> Query<T>(this ISession session, Func<ICriteria, ICriteria> action) where T : class
         {
             IEnumerable<T> enumerable;
-            using (var trans = plugin.Session.BeginTransaction())
+            using (var trans = session.BeginTransaction())
             {
-                var criteria = plugin.Session.CreateCriteria<T>();
+                var criteria = session.CreateCriteria<T>();
                 if(action != null)
                     criteria = action(criteria);
 

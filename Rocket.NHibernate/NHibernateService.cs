@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -15,6 +16,7 @@ namespace Rocket.NHibernate
     public class NHibernateService : INHibernateService, IEventListener<PluginUnloadEvent>
     {
         private readonly Dictionary<IPlugin, ISessionFactory> _sessionFactories = new Dictionary<IPlugin, ISessionFactory>();
+        private readonly Dictionary<IPlugin, List<ISession>> _sessions = new Dictionary<IPlugin, List<ISession>>();
 
         public NHibernateService(IRuntime runtime, IEventManager eventManager)
         {
@@ -64,7 +66,22 @@ namespace Rocket.NHibernate
 
         public virtual ISession OpenSession(IPlugin plugin)
         {
-            return GetSessionFactory(plugin).OpenSession();
+            var session = GetSessionFactory(plugin).OpenSession();
+
+            if (!_sessions.ContainsKey(plugin))
+                _sessions.Add(plugin, new List<ISession>());
+
+            _sessions[plugin].Add(session);
+            return session;
+        }
+
+        public virtual void CloseSession(IPlugin plugin, ISession session)
+        {
+            if (!_sessions.ContainsKey(plugin))
+                return;
+
+            session.Close();
+            _sessions[plugin].RemoveAll(c => c == session);
         }
 
         public virtual IPersistenceConfigurer GetConfigurer(NHibernateConnectionInfo info)
@@ -115,8 +132,11 @@ namespace Rocket.NHibernate
 
         public void HandleEvent(IEventEmitter emitter, PluginUnloadEvent @event)
         {
-           if(@event.Plugin is INHibernatePlugin plugin)
-               plugin.Session?.Dispose();
+            if (!_sessions.ContainsKey(@event.Plugin))
+                return;
+
+            foreach(var sess in _sessions[@event.Plugin].ToList())
+                CloseSession(@event.Plugin, sess);
         }
     }
 }

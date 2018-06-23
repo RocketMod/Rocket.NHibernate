@@ -14,6 +14,7 @@ namespace Rocket.NHibernate
             _service = service;
             _plugin = plugin;
         }
+
         public virtual INHibernateBuilder UseAutoMapping(bool value = true)
         {
             if (AutoMap)
