@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net35;net461;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Rocket.Core" Version="5.0.0.560" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rocket.NHibernate\Rocket.NHibernate.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\lib\NHibernate.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net35' ">
+    <PackageReference Include="FluentNHibernate" Version="2.1.2" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rocket.NHibernate", "Rocket.NHibernate\Rocket.NHibernate.csproj", "{4DC56D5F-AED8-4971-9304-82A10EE25D5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rocket.NHibernate.ExamplePlugin", "Rocket.NHibernate.TestPlugin\Rocket.NHibernate.ExamplePlugin.csproj", "{89207482-E1B7-4B40-8949-C2141C921327}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DC56D5F-AED8-4971-9304-82A10EE25D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC56D5F-AED8-4971-9304-82A10EE25D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC56D5F-AED8-4971-9304-82A10EE25D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC56D5F-AED8-4971-9304-82A10EE25D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89207482-E1B7-4B40-8949-C2141C921327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89207482-E1B7-4B40-8949-C2141C921327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89207482-E1B7-4B40-8949-C2141C921327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89207482-E1B7-4B40-8949-C2141C921327}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E9B5D1F-7669-4732-8736-862F791A5B3D}
+	EndGlobalSection
+EndGlobal
