@@ -5,6 +5,7 @@ using System.Linq;
 //using FluentNHibernate.Mapping; // uncomment when using TestEntryMap at the bottom
 using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.Linq;
 using Rocket.API.DependencyInjection;
 using Rocket.Core.Plugins;
 
@@ -35,7 +36,9 @@ namespace Rocket.NHibernate.ExamplePlugin
 
             _session.SaveEntry(toAdd);
 
-            var entries = _session.Query<TestEntry>(c => c.AddOrder(Order.Asc("Id"))).ToList();
+            var entries = _session.Query<TestEntry>().ToList();
+
+
             Logger.Log("Entry count: " + entries.Count);
             foreach (var entry in entries)
             {

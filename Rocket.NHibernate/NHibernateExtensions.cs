@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NHibernate;
+using NHibernate.Linq;
 using Rocket.API.Plugins;
 
 namespace Rocket.NHibernate
@@ -28,12 +30,9 @@ namespace Rocket.NHibernate
             }
         }
 
-        public static IEnumerable<T> Query<T>(this ISession session) where T: class
-        {
-            return Query<T>(session, null);
-        }
 
-        public static IEnumerable<T> Query<T>(this ISession session, Func<ICriteria, ICriteria> action) where T : class
+
+        public static IEnumerable<T> QueryCriteriaWithTransaction<T>(this ISession session, Func<ICriteria, ICriteria> action) where T : class
         {
             IEnumerable<T> enumerable;
             using (var trans = session.BeginTransaction())
@@ -49,5 +48,43 @@ namespace Rocket.NHibernate
             return enumerable;
         }
 
+        public static int DeleteWithTransaction<T>(this ISession session, Func<IQueryable<T>, IQueryable<T>> action) where T : class
+        {
+            int c = 0;
+            using (var trans = session.BeginTransaction())
+            {
+                var queryable = session.Query<T>();
+
+                if (action != null)
+                    queryable = action(queryable);
+
+                foreach (var t in queryable.ToList())
+                {
+                    session.Delete(t);
+                    c++;
+                }
+
+                trans.Commit();
+            }
+
+            return c;
+        }
+
+        public static int UpdateWithTransaction<T>(this ISession session, params object[] toUpdate) where T : class
+        {
+            int c = 0;
+            using (var trans = session.BeginTransaction())
+            {
+                foreach (var t in toUpdate)
+                {
+                    session.Update(t);
+                    c++;
+                }
+
+                trans.Commit();
+            }
+
+            return c;
+        }
     }
 }
