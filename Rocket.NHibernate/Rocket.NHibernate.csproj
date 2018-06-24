@@ -32,4 +32,23 @@
   <ItemGroup>
     <PackageReference Include="Rocket.Core" Version="5.0.0.560" />
   </ItemGroup>
+  
+   <PropertyGroup>
+    <PackageId>Rocket.NHibernate</PackageId>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>    
+	<PackageTags>RocketMod Rocket UnityEngine UnrealEngine Plugin Framework NHibernate</PackageTags>
+    <PackageLicenseUrl>https://github.com/RocketMod/Rocket.NHibernate/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://rocketmod.net/</PackageProjectUrl>
+	<PackageAuthors>Enes Sadık Özbek &lt;esozbek.me&gt;</PackageAuthors>
+    <PackageOwners>Enes Sadık Özbek &lt;esozbek.me&gt;</PackageOwners>
+    <Version>0.0.0.0</Version>
+	<PackageVersion>0.0.0.0</PackageVersion>
+    <Authors>Enes Sadık Özbek &lt;esozbek.me&gt;</Authors>
+    <Company>RocketMod</Company>
+    <Description>RocketMod .NET Game Server Plugin Framework NHibernate integration</Description>
+    <Copyright>Sven Mawby &lt;fr34kyn01535@bam.yt&gt;</Copyright>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <FileVersion>0.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>   
 </Project>
