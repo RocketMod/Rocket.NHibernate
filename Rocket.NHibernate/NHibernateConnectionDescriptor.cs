@@ -46,12 +46,6 @@ namespace Rocket.NHibernate
         {
             new NHibernateConnectionInfo
             {
-                ConnectionName = "DefaultInMemoryConnection",
-                ProviderName = "InMemory",
-                ConnectionString = "MyDatabaseName"
-            },
-            new NHibernateConnectionInfo
-            {
                 ConnectionName = "DefaultMySqlConnection",
                 ProviderName = "MySql",
                 ConnectionString = "SERVER=localhost; DATABASE=myDataBase; UID=myUsername; PASSWORD=myPassword"
@@ -66,7 +60,7 @@ namespace Rocket.NHibernate
             {
                 ConnectionName = "DefaultSqliteConnection",
                 ProviderName = "Sqlite",
-                ConnectionString = "Data Source={PluginDir}\\Plugin.db;Version=3;"
+                ConnectionString = "Data Source={PluginDir}\\Database.db;Version=3;"
             },
             new NHibernateConnectionInfo
             {
@@ -78,7 +72,25 @@ namespace Rocket.NHibernate
             {
                 ConnectionName = "DefaultSqlServerCompactConnection",
                 ProviderName = "SqlServerCompact",
-                ConnectionString = "Data Source={PluginDir}\\Plugin.sdf;Persist Security Info=False;"
+                ConnectionString = "Data Source={PluginDir}\\Database.sdf;Persist Security Info=False;"
+            },
+            new NHibernateConnectionInfo
+            {
+                ConnectionName = "DefaultOracleConnection",
+                ProviderName = "Oracle",
+                ConnectionString = "Data Source=MyOracleDB;User Id=myUsername;Password=myPassword; Integrated Security=no;"
+            },
+            new NHibernateConnectionInfo
+            {
+                ConnectionName = "DefaultJetDriver",
+                ProviderName = "JetDriver",
+                ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={PluginDir}\\Database.accdb;Persist Security Info=False;"
+            },
+            new NHibernateConnectionInfo
+            {
+                ConnectionName = "DefaultSqlAnywhere",
+                ProviderName = "SqlAnywhere",
+                ConnectionString = "FileDSN={Plugin}\\Database.dsn"
             }
         };
     }

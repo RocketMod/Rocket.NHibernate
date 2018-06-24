@@ -14,6 +14,7 @@
     <Reference Include="NHibernate">
       <HintPath>..\lib\NHibernate.dll</HintPath>
     </Reference>
+	<Reference Include="System.Configuration" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != 'net35' ">

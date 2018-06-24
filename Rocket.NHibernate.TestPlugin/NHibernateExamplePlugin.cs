@@ -38,7 +38,6 @@ namespace Rocket.NHibernate.ExamplePlugin
 
             var entries = _session.Query<TestEntry>().ToList();
 
-
             Logger.Log("Entry count: " + entries.Count);
             foreach (var entry in entries)
             {

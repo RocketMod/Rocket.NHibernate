@@ -101,7 +101,7 @@ namespace Rocket.NHibernate
                     return MsSqlCeConfiguration.MsSqlCe40
                         .ConnectionString(info.ConnectionString)
                         .ShowSql();
-                case "orcale":
+                case "oracle":
                     return OracleDataClientConfiguration.Oracle10
                         .ConnectionString(info.ConnectionString)
                         .ShowSql();
