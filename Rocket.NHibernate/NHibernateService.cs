@@ -45,7 +45,8 @@ namespace Rocket.NHibernate
                         var pluginAssembly = plugin.GetType().Assembly;
                         m.FluentMappings
                             .AddFromAssembly(typeof(NHibernateService).Assembly)
-                            .AddFromAssembly(pluginAssembly);
+                            .AddFromAssembly(pluginAssembly)
+                            .Conventions.Add(DefaultCascade.All());
 
                         if (builder.AutoMap)
                         {
